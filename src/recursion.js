@@ -38,27 +38,40 @@ function jazz(array){
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
 var sum = function (array) {
-  // if the array is an array with more than one term then go on
-  // let var = array[0]+array[1] --adds the first two numbers together
-  // use splice to remove and then replace 0,1 with the new var
-  // call the function again
-
+  // Base case: if the array is empty, the sum is 0
   if (array.length === 0) {
-    return 0
-  } else {
-    //array.splice(0, 2, partSum)
-    return array[0]+sum(array.slice(1))
+    return 0;
   }
+  // Recursive case: sum = first element + sum of the rest of the array
+  // Slice the array to remove the first element and sum the rest using recursion
+  return array[0] + sum(array.slice(1));
 };
+
+
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function (array) {
+// base case
+if(array.length === 0){
+  return 0;
+}
 };
 
 // 4. Check if a number is even.
 var isEven = function (n) {
-};
+//if n = 1 return true
+//if n is odd return false if n is a decimal return false
+if( n === 0){
+  return true;
+}
+ if(n === 1){
+return false;
+}
+//recursive case
+return isEven(Math.abs(n) - 2);
+}
+;
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
