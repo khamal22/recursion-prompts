@@ -74,14 +74,44 @@ return isEven(Math.abs(n) - 2);
 ;
 
 // 5. Sum all integers below a given integer.
-// sumBelow(10); // 45
-// sumBelow(7); // 21
+// sumBelow(10); 9+8+7+6+5+4+3+2+1// 45
+// sumBelow(7) 6+5+4+3+2+1; // 21
 var sumBelow = function (n) {
+  // Base case
+  // if 0 then return 0
+  if(n === 0){
+    return 0
+  } 
+  // if n < 0 then add 1 else sub 1  
+  return n > 0 ? n-1 + sumBelow(n-1): n+1+sumBelow(n+1)
 };
 
 // 6. Get the integers in range (x, y).
-// Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
+// Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]    5,15  > [6,7,8,9...14]
 var range = function (x, y) {
+  // Base Case
+  // create array
+  const between = [];
+  let a = x
+  // create conditional statement
+
+  if (x > y+1 ){
+    between.push(a)
+    console.log(between)
+    return (a-1)+range(x-1,y)
+  } else if (x < y-1){
+
+    return (a+1)+range(x+1,y)
+  }
+  //  else if (x === y){
+  //   return y = between
+  // }
+
+
+  return between
+
+  /*
+  return n > 0 ? n-1 + sumBelow(n-1): n+1+sumBelow(n+1)*/
 };
 
 // 7. Compute the exponent of a number.
