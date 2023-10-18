@@ -88,27 +88,39 @@ var sumBelow = function (n) {
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]    5,15  > [6,7,8,9...14]
-var range = function (x, y) {
+var range = function (x, y, between = []) {
+  //should return empty array if no integers in range
+  if(x === y){
+    return between;
+  }
   // Base Case
+  if(x === y -1){
+    //return result array
+return between
+  }
+  if(x === y + 1){
+return between;
+  }
   // create array
-  const between = [];
-  let a = x
+  
   // create conditional statement
 
   if (x > y + 1) {
-    between.push(a)
-    console.log(between)
-    return (a - 1) + range(x - 1, y)
-  } else if (x < y - 1) {
+    console.log(between);
 
-    return (a + 1) + range(x + 1, y)
+    between.push(x - 1)
+    return range(x - 1, y, between)
+  } else if (x < y - 1) {
+// pushing the next numerical value after x between array
+    between.push(x + 1)
+    return range(x + 1, y, between)
   }
   //  else if (x === y){
   //   return y = between
   // }
 
-
-  return between
+// console.log(between);
+ 
 
   /*
   return n > 0 ? n-1 + sumBelow(n-1): n+1+sumBelow(n+1)*/
