@@ -106,8 +106,7 @@ return between;
   // create conditional statement
 
   if (x > y + 1) {
-    console.log(between);
-
+    
     between.push(x - 1)
     return range(x - 1, y, between)
   } else if (x < y - 1) {
@@ -115,15 +114,6 @@ return between;
     between.push(x + 1)
     return range(x + 1, y, between)
   }
-  //  else if (x === y){
-  //   return y = between
-  // }
-
-// console.log(between);
- 
-
-  /*
-  return n > 0 ? n-1 + sumBelow(n-1): n+1+sumBelow(n+1)*/
 };
 
 // 7. Compute the exponent of a number.
@@ -132,6 +122,21 @@ return between;
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function (base, exp) {
+  // Base case
+  // for how long exp is, multiply base to its self that many times
+  // (3,3) 
+  if (exp > 1){
+    return exponent( base, exp-1)
+  }
+  // If exp is 1 then return base
+  if (exp === 1){
+    return base
+  }
+  if (exp === 0){
+    return 1
+  }
+
+
 };
 
 // 8. Determine if a number is a power of two.
