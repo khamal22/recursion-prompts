@@ -90,27 +90,27 @@ var sumBelow = function (n) {
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]    5,15  > [6,7,8,9...14]
 var range = function (x, y, between = []) {
   //should return empty array if no integers in range
-  if(x === y){
+  if (x === y) {
     return between;
   }
   // Base Case
-  if(x === y -1){
+  if (x === y - 1) {
     //return result array
-return between
+    return between
   }
-  if(x === y + 1){
-return between;
+  if (x === y + 1) {
+    return between;
   }
   // create array
-  
+
   // create conditional statement
 
   if (x > y + 1) {
-    
+
     between.push(x - 1)
     return range(x - 1, y, between)
   } else if (x < y - 1) {
-// pushing the next numerical value after x between array
+    // pushing the next numerical value after x between array
     between.push(x + 1)
     return range(x + 1, y, between)
   }
@@ -129,27 +129,27 @@ var exponent = function (base, exp, store = []) {
   store.push(base) // [] > [base,...]
   // Recursive Case
   // if exp is above 1 then mult base by the first interger and sub exp by 1 
-  if (exp > 1){
-    return exponent( base * store[0], exp-1, store)
-  } 
+  if (exp > 1) {
+    return exponent(base * store[0], exp - 1, store)
+  }
   // if exp is under 1 then:
   //  divide 1 over base and the first interger of store and add 1 to exp
   // repeat this only id store[1] is not defined which will happen the first time it is run
-  else if (exp < -1 && store[1] === undefined){
-    return exponent( 1/(base) * 1/(store[0]), exp+1, store)
+  else if (exp < -1 && store[1] === undefined) {
+    return exponent(1 / (base) * 1 / (store[0]), exp + 1, store)
   }
   //  divide 1 over the first interger of store and mult it by base and add 1 to exp
   // runs only when store[1] has a type of number
   // store[0] is only divided because base has already been manipulated by the neg exp
-  else if (exp < -1 && typeof(store[1]) === 'number'){
-    return exponent( (base) * 1/(store[0]), exp+1, store)
+  else if (exp < -1 && typeof (store[1]) === 'number') {
+    return exponent((base) * 1 / (store[0]), exp + 1, store)
   }
   // If exp is 1 or -1 then return base
-  if (exp === 1 || exp === -1){
+  if (exp === 1 || exp === -1) {
     return base
   }
   // If base is 0 then return 1
-  if (exp === 0){
+  if (exp === 0) {
     return 1
   }
 };
@@ -159,10 +159,36 @@ var exponent = function (base, exp, store = []) {
 // powerOfTwo(16); // true      2^4 = 2
 // powerOfTwo(10); // false&
 var powerOfTwo = function (n) {
+  //base case 
+  // if n is 0, it is not a power of 2, so return false
+  if (n === 0) {
+    return false;
+  }
+  //if n is 1, it is 2^0 = 1, which is a power of 2 so return true
+  if (n === 1) {
+    return true
+  }
+  //if n is not divisible by 2 its not a power of 2
+  if(n % 2 !== 0){
+return false;
+  }
+// if n is even recursively call the powerofTwo function with n/2 as the argument
+  return powerOfTwo(n/2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
-var reverse = function (string) {
+var reverse = function (string, resultStr = '') {
+  // base case 
+  if(!string.length){
+return resultStr;
+  }
+  // access the first index of resultStr and assign to the last character in string
+  resultStr +=  string[string.length - 1];
+  console.log(resultStr)
+  // take last character off string
+  string = string.slice(0, -1);
+  // call reverse with param as arguments
+  return reverse(string, resultStr);
 };
 
 // 10. Write a function that determines if a string is a palindrome.
