@@ -121,28 +121,43 @@ return between;
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
-var exponent = function (base, exp) {
+// The store array is used to store the bases cganges
+var exponent = function (base, exp, store = []) {
   // Base case
-  // for how long exp is, multiply base to its self that many times
-  // (3,3) 
+  // for how long exp is, multiply base to its self that many times >>> 2^3 = 2 * 2 * 2
+  // Use store to store base and the following base changes     
+  store.push(base) // [] > [base,...]
+  // Recursive Case
+  // if exp is above 1 then mult base by the first interger and sub exp by 1 
   if (exp > 1){
-    return exponent( base, exp-1)
+    return exponent( base * store[0], exp-1, store)
+  } 
+  // if exp is under 1 then:
+  //  divide 1 over base and the first interger of store and add 1 to exp
+  // repeat this only id store[1] is not defined which will happen the first time it is run
+  else if (exp < -1 && store[1] === undefined){
+    return exponent( 1/(base) * 1/(store[0]), exp+1, store)
   }
-  // If exp is 1 then return base
-  if (exp === 1){
+  //  divide 1 over the first interger of store and mult it by base and add 1 to exp
+  // runs only when store[1] has a type of number
+  // store[0] is only divided because base has already been manipulated by the neg exp
+  else if (exp < -1 && typeof(store[1]) === 'number'){
+    return exponent( (base) * 1/(store[0]), exp+1, store)
+  }
+  // If exp is 1 or -1 then return base
+  if (exp === 1 || exp === -1){
     return base
   }
+  // If base is 0 then return 1
   if (exp === 0){
     return 1
   }
-
-
 };
 
 // 8. Determine if a number is a power of two.
-// powerOfTwo(1); // true
-// powerOfTwo(16); // true
-// powerOfTwo(10); // false
+// powerOfTwo(1); // true       2^0 = 1
+// powerOfTwo(16); // true      2^4 = 2
+// powerOfTwo(10); // false&
 var powerOfTwo = function (n) {
 };
 
@@ -156,7 +171,7 @@ var palindrome = function (string) {
 
 // 11. Write a function that returns the remainder of x divided by y without using the
 // modulo (%) operator.
-// modulo(5,2) // 1
+// modulo(5,2)  // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function (x, y) {
