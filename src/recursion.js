@@ -169,21 +169,21 @@ var powerOfTwo = function (n) {
     return true
   }
   //if n is not divisible by 2 its not a power of 2
-  if(n % 2 !== 0){
-return false;
+  if (n % 2 !== 0) {
+    return false;
   }
-// if n is even recursively call the powerofTwo function with n/2 as the argument
-  return powerOfTwo(n/2);
+  // if n is even recursively call the powerofTwo function with n/2 as the argument
+  return powerOfTwo(n / 2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function (string, resultStr = '') {
   // base case 
-  if(!string.length){
-return resultStr;
+  if (!string.length) {
+    return resultStr;
   }
   // access the first index of resultStr and assign to the last character in string
-  resultStr +=  string[string.length - 1];
+  resultStr += string[string.length - 1];
   console.log(resultStr)
   // take last character off string
   string = string.slice(0, -1);
@@ -193,6 +193,25 @@ return resultStr;
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function (string) {
+  //base case
+  //find out if the first and last chrarcters are the same 
+  if (string.length === 1) {
+    return true;
+  }
+  if (string.length === 1) {
+    return string[0] === string[1];
+  }
+  // take out the spaces in the string
+  string = string.replace(/\s*/g, "")
+  //compare the first and last character while making sure that it is lowercased
+  if (string[0].toLowerCase() === string.slice(-1).toLowerCase()) {
+
+    return palindrome(string.slice(1, -1))
+  }
+  //if the first and last characters are not the same the string is not a palindrome
+  return false;
+
+  //
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -206,8 +225,21 @@ var modulo = function (x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-var multiply = function (x, y) {
-};
+// Base case
+// for how long y is, add x to its self that many times
+// Use store to store x and the following x changes
+// Recursive Case
+// if y is above 1 then add x by the first interger and sub y by 1
+// if y is under 1 then add x by the first interger and sub y by 1
+  var multiply = function (x, y, store = []) {
+    store.push(x)
+    if (y > 1) { return multiply(x + store[0], y - 1, store) }
+    else if (y < -1) { return multiply((x) + (store[0]), y + 1, store) }
+    if (y === 1) { return x }
+    if (y === -1) { return -x } if (y === 0) { return 0 }
+  };
+
+;
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
@@ -237,12 +269,23 @@ var createArray = function (str) {
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+  if (array.length === 1) return [array[0]];
+  var list = reverseArr(array.slice(1, array.length));
+  list.push(array[0]);
+  return list;
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function (value, length) {
+  // Check if the input array has only one element
+  if (length === 0)
+    return [];
+  var list = buildList(value, length - 1);
+  // Add the first element of the original array to the reversed array
+  list.push(value);
+  return list;
 };
 
 // 19. Count the occurence of a value inside a list.
