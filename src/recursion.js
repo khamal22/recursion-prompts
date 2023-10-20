@@ -169,22 +169,21 @@ var powerOfTwo = function (n) {
     return true
   }
   //if n is not divisible by 2 its not a power of 2
-  if(n % 2 !== 0){
-return false;
+  if (n % 2 !== 0) {
+    return false;
   }
-// if n is even recursively call the powerofTwo function with n/2 as the argument
-  return powerOfTwo(n/2);
+  // if n is even recursively call the powerofTwo function with n/2 as the argument
+  return powerOfTwo(n / 2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function (string, resultStr = '') {
   // base case 
-  if(!string.length){
-return resultStr;
+  if (!string.length) {
+    return resultStr;
   }
   // access the first index of resultStr and assign to the last character in string
-  resultStr +=  string[string.length - 1];
-  console.log(resultStr)
+  resultStr += string[string.length - 1];
   // take last character off string
   string = string.slice(0, -1);
   // call reverse with param as arguments
@@ -193,12 +192,25 @@ return resultStr;
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function (string) {
+  //base case
+  //find out if the first and last chrarcters are the same 
+  if (string.length === 1) {
+    return true;
+  }
+  if (string.length === 1) {
+    return string[0] === string[1];
+  }
+  // take out the spaces in the string
+  string = string.replace(/\s*/g, "")
+  //compare the first and last character while making sure that it is lowercased
+  if (string[0].toLowerCase() === string.slice(-1).toLowerCase()) {
 
+    return palindrome(string.slice(1, -1))
+  }
+  //if the first and last characters are not the same the string is not a palindrome
+  return false;
 
-
-
-
-
+  //
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -266,12 +278,23 @@ var createArray = function (str) {
 
 // 17. Reverse the order of an array
 var reverseArr = function (array) {
+  if (array.length === 1) return [array[0]];
+  var list = reverseArr(array.slice(1, array.length));
+  list.push(array[0]);
+  return list;
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function (value, length) {
+  // Check if the input array has only one element
+  if (length === 0)
+    return [];
+  var list = buildList(value, length - 1);
+  // Add the first element of the original array to the reversed array
+  list.push(value);
+  return list;
 };
 
 // 19. Count the occurence of a value inside a list.
@@ -317,7 +340,23 @@ var fibonacci = function (n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function (n) {
+var nthFibo = function (n, hold = 0, sum = 1) {
+  // Base Case
+  // add hold[0] and hold[1]
+  // replace hold[0] with [1] push sum to hold[1]
+  // Sub 1 from n each time
+  if (n < 0){
+    return null
+  }
+  if (n === 0){
+    return 0
+  }
+  if (n === 1){
+    return sum
+  }
+  if (n > 1){
+    return nthFibo(n-1, sum, sum += hold )
+  }
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
