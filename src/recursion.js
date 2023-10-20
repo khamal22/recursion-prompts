@@ -260,11 +260,33 @@ var gcd = function (x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function (str1, str2) {
+  //base case 
+  // if both strings are empty, they are equal
+  if(str1 === '' && str2 === ''){
+return true;
+  }
+  //if one of the strings is empty while the other is not they are not equal
+  if(str1 === '' || str2 === ''){
+return false;
+  }
+  //recursive case comparing the first chararcters of both strings 
+  if(str1[0] === str2[0]){
+return compareStr(str1.slice(1), str2.slice(1))
+  }
+  //if the forst characters are not equal, the strings are not equal
+  return false;
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 var createArray = function (str) {
+  //base case 
+  //if the input string is empty, return a empty array
+  if(str === ''){
+return []
+  }
+  //recursive case take the first character from the string and put them together (concatenate)
+  return [str[0]].concat(createArray(str.slice(1)));
 };
 
 // 17. Reverse the order of an array
@@ -292,11 +314,36 @@ var buildList = function (value, length) {
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function (array, value) {
+  //base case 
+  // if array is empty they are no occurences 
+  if(array.length === 0){
+return 0;
+  }
+  //the recursive case checks if the first element of the array is equal to the target value
+  //if it is, add 1 and call the function on the rest of the array
+  //if it is not call the function on the rest of the array
+  if(array[0] === value){
+
+  }
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
 var rMap = function (array, callback) {
+  //base case 
+  //if the input array is empty, return as an empty array
+  if(array.length === 0){
+return [];
+  }
+  //recursive case call the function on the rest of the array but not the first element 
+  //this recursive call has the remaining elements of the array using the same callback function
+  var list = rMap(array.slice(1,array.length), callback);
+
+  //apply the callback function to the first element of the arrayy and add the result to the beginning of the list 
+  var mappedValue = callback(array[0]);
+  list.unshift(mappedValue);
+  //return the updated list with the mapped value at the beginning 
+  return list;
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -343,6 +390,8 @@ var capitalizeWords = function (input) {
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function (array) {
+  //base case 
+  // if the input array is empty 
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -373,6 +422,7 @@ var letterTally = function (str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function (list) {
+
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
