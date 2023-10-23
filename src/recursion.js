@@ -231,13 +231,13 @@ var modulo = function (x, y) {
 // Recursive Case
 // if y is above 1 then add x by the first interger and sub y by 1
 // if y is under 1 then add x by the first interger and sub y by 1
-  var multiply = function (x, y, store = []) {
-    store.push(x)
-    if (y > 1) { return multiply(x + store[0], y - 1, store) }
-    else if (y < -1) { return multiply((x) + (store[0]), y + 1, store) }
-    if (y === 1) { return x }
-    if (y === -1) { return -x } if (y === 0) { return 0 }
-  };
+var multiply = function (x, y, store = []) {
+  store.push(x)
+  if (y > 1) { return multiply(x + store[0], y - 1, store) }
+  else if (y < -1) { return multiply((x) + (store[0]), y + 1, store) }
+  if (y === 1) { return x }
+  if (y === -1) { return -x } if (y === 0) { return 0 }
+};
 
 ;
 
@@ -262,16 +262,16 @@ var gcd = function (x, y) {
 var compareStr = function (str1, str2) {
   //base case 
   // if both strings are empty, they are equal
-  if(str1 === '' && str2 === ''){
-return true;
+  if (str1 === '' && str2 === '') {
+    return true;
   }
   //if one of the strings is empty while the other is not they are not equal
-  if(str1 === '' || str2 === ''){
-return false;
+  if (str1 === '' || str2 === '') {
+    return false;
   }
   //recursive case comparing the first chararcters of both strings 
-  if(str1[0] === str2[0]){
-return compareStr(str1.slice(1), str2.slice(1))
+  if (str1[0] === str2[0]) {
+    return compareStr(str1.slice(1), str2.slice(1))
   }
   //if the forst characters are not equal, the strings are not equal
   return false;
@@ -282,8 +282,8 @@ return compareStr(str1.slice(1), str2.slice(1))
 var createArray = function (str) {
   //base case 
   //if the input string is empty, return a empty array
-  if(str === ''){
-return []
+  if (str === '') {
+    return []
   }
   //recursive case take the first character from the string and put them together (concatenate)
   return [str[0]].concat(createArray(str.slice(1)));
@@ -316,13 +316,13 @@ var buildList = function (value, length) {
 var countOccurrence = function (array, value) {
   //base case 
   // if array is empty they are no occurences 
-  if(array.length === 0){
-return 0;
+  if (array.length === 0) {
+    return 0;
   }
   //the recursive case checks if the first element of the array is equal to the target value
   //if it is, add 1 and call the function on the rest of the array
   //if it is not call the function on the rest of the array
-  if(array[0] === value){
+  if (array[0] === value) {
 
   }
 };
@@ -332,12 +332,12 @@ return 0;
 var rMap = function (array, callback) {
   //base case 
   //if the input array is empty, return as an empty array
-  if(array.length === 0){
-return [];
+  if (array.length === 0) {
+    return [];
   }
   //recursive case call the function on the rest of the array but not the first element 
   //this recursive call has the remaining elements of the array using the same callback function
-  var list = rMap(array.slice(1,array.length), callback);
+  var list = rMap(array.slice(1, array.length), callback);
 
   //apply the callback function to the first element of the arrayy and add the result to the beginning of the list 
   var mappedValue = callback(array[0]);
@@ -385,6 +385,17 @@ var nthFibo = function (n) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function (input) {
+  //base case 
+  //if the array is empty return an empty array
+  if (input.length === 0) {
+    return []
+  }
+  // Call the capitalizeWords function recursively on the sliced array
+  var list = capitalizeWords(input.slice(1, input.length))
+  // Capitalize the first word of the original array and add it to the beginning of the 'list' array.
+  list.unshift(input[0].toUpperCase());
+  // Return the modified 'list' array with the first word capitalized and the rest of the words capitalized
+  return list;
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
