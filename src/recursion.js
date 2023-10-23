@@ -402,7 +402,19 @@ var capitalizeWords = function (input) {
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function (array) {
   //base case 
-  // if the input array is empty 
+  // check if the input array is empty 
+  if(array.length === 0){
+    //if the array is empty return a empty array
+    return [];
+  }
+  //create a varible to call the function recursively
+  var list = capitalizeFirst(array.slice(1, array.length));
+//capitalize the first letter of the first element of the array
+//concat it with the rest of the string then add it to the front of list array
+list.unshift(array[0][0].toUpperCase() + array[0].substring(1));
+
+//return the changed list array 
+return list;
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
@@ -445,7 +457,15 @@ var augmentElements = function (array, aug) {
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
-var minimizeZeroes = function (array) {
+var minimizeZeroes = function (array, resultList = []) {
+  //base case
+  if(array.length === 0){
+return resultList
+  }
+//check if first item in array is a zero 
+//if the first element in the array is zero check if the next element is zero 
+//if the next element is zero get rid of it
+//if the first value is not a zero push into the resultList array
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -453,6 +473,8 @@ var minimizeZeroes = function (array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function (array) {
+
+
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
