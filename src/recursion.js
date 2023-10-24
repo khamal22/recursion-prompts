@@ -271,16 +271,16 @@ var gcd = function (x, y) {
 var compareStr = function (str1, str2) {
   //base case 
   // if both strings are empty, they are equal
-  if(str1 === '' && str2 === ''){
-return true;
+  if (str1 === '' && str2 === '') {
+    return true;
   }
   //if one of the strings is empty while the other is not they are not equal
-  if(str1 === '' || str2 === ''){
-return false;
+  if (str1 === '' || str2 === '') {
+    return false;
   }
   //recursive case comparing the first chararcters of both strings 
-  if(str1[0] === str2[0]){
-return compareStr(str1.slice(1), str2.slice(1))
+  if (str1[0] === str2[0]) {
+    return compareStr(str1.slice(1), str2.slice(1))
   }
   //if the forst characters are not equal, the strings are not equal
   return false;
@@ -291,8 +291,8 @@ return compareStr(str1.slice(1), str2.slice(1))
 var createArray = function (str) {
   //base case 
   //if the input string is empty, return a empty array
-  if(str === ''){
-return []
+  if (str === '') {
+    return []
   }
   //recursive case take the first character from the string and put them together (concatenate)
   return [str[0]].concat(createArray(str.slice(1)));
@@ -322,18 +322,24 @@ var buildList = function (value, length) {
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function (array, value) {
+var countOccurrence = function (array, value, store = []) {
   //base case 
   // if array is empty they are no occurences 
-  if(array.length === 0){
-return 0;
-  }
+  
   //the recursive case checks if the first element of the array is equal to the target value
   //if it is, add 1 and call the function on the rest of the array
   //if it is not call the function on the rest of the array
-  if(array[0] === value){
+  let i = 0
 
+  if (array.length > 1 && array[i] === value){
+    i += 1
+    store.push(array[i])
+    return countOccurrence(array, value, store)
   }
+
+
+
+  return store.length
 };
 
 // 20. Write a recursive version of map.
@@ -341,12 +347,12 @@ return 0;
 var rMap = function (array, callback) {
   //base case 
   //if the input array is empty, return as an empty array
-  if(array.length === 0){
-return [];
+  if (array.length === 0) {
+    return [];
   }
   //recursive case call the function on the rest of the array but not the first element 
   //this recursive call has the remaining elements of the array using the same callback function
-  var list = rMap(array.slice(1,array.length), callback);
+  var list = rMap(array.slice(1, array.length), callback);
 
   //apply the callback function to the first element of the arrayy and add the result to the beginning of the list 
   var mappedValue = callback(array[0]);
@@ -410,6 +416,17 @@ var nthFibo = function (n, hold = 0, sum = 1) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function (input) {
+  //base case 
+  //if the array is empty return an empty array
+  if (input.length === 0) {
+    return []
+  }
+  // Call the capitalizeWords function recursively on the sliced array
+  var list = capitalizeWords(input.slice(1, input.length))
+  // Capitalize the first word of the original array and add it to the beginning of the 'list' array.
+  list.unshift(input[0].toUpperCase());
+  // Return the modified 'list' array with the first word capitalized and the rest of the words capitalized
+  return list;
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
