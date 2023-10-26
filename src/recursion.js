@@ -463,6 +463,14 @@ var minimizeZeroes = function (array, resultList = []) {
 return resultList
   }
 //check if first item in array is a zero 
+if(array[0] === 0){
+
+}
+
+if(array[0] !== 0){
+
+}
+
 //if the first element in the array is zero check if the next element is zero 
 //if the next element is zero get rid of it
 //if the first value is not a zero push into the resultList array
