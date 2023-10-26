@@ -184,7 +184,6 @@ var reverse = function (string, resultStr = '') {
   }
   // access the first index of resultStr and assign to the last character in string
   resultStr += string[string.length - 1];
-  console.log(resultStr)
   // take last character off string
   string = string.slice(0, -1);
   // call reverse with param as arguments
@@ -225,21 +224,31 @@ var modulo = function (x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-// Base case
-// for how long y is, add x to its self that many times
-// Use store to store x and the following x changes
-// Recursive Case
-// if y is above 1 then add x by the first interger and sub y by 1
-// if y is under 1 then add x by the first interger and sub y by 1
-var multiply = function (x, y, store = []) {
-  store.push(x)
-  if (y > 1) { return multiply(x + store[0], y - 1, store) }
-  else if (y < -1) { return multiply((x) + (store[0]), y + 1, store) }
-  if (y === 1) { return x }
-  if (y === -1) { return -x } if (y === 0) { return 0 }
-};
 
-;
+// Base case
+  // for how long y is, add x to its self that many times
+  // Use store to store x and the following x changes     
+// Recursive Case
+  // if y is above 1 then add x by the first interger and sub y by 1 
+  // if y is under 1 then add x by the first interger and sub y by 1
+var multiply = function (x, y, store = []) { 
+  store.push(x) 
+  if (y > 1) {
+    return multiply(x + store[0], y - 1, store)
+  }
+  else if (y < -1) {
+    return multiply((x) + (store[0]), y + 1, store)
+  }
+  if (y === 1) {
+    return x
+  }
+  if (y === -1){
+    return -x
+  }
+  if (y === 0) {
+    return 0
+  }
+};
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
@@ -313,18 +322,24 @@ var buildList = function (value, length) {
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function (array, value) {
+var countOccurrence = function (array, value, store = []) {
   //base case 
   // if array is empty they are no occurences 
-  if (array.length === 0) {
-    return 0;
-  }
+  
   //the recursive case checks if the first element of the array is equal to the target value
   //if it is, add 1 and call the function on the rest of the array
   //if it is not call the function on the rest of the array
-  if (array[0] === value) {
+  let i = 0
 
+  if (array.length > 1 && array[i] === value){
+    i += 1
+    store.push(array[i])
+    return countOccurrence(array, value, store)
   }
+
+
+
+  return store.length
 };
 
 // 20. Write a recursive version of map.
@@ -378,7 +393,23 @@ var fibonacci = function (n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function (n) {
+var nthFibo = function (n, hold = 0, sum = 1) {
+  // Base Case
+  // add hold[0] and hold[1]
+  // replace hold[0] with [1] push sum to hold[1]
+  // Sub 1 from n each time
+  if (n < 0){
+    return null
+  }
+  if (n === 0){
+    return 0
+  }
+  if (n === 1){
+    return sum
+  }
+  if (n > 1){
+    return nthFibo(n-1, sum, sum += hold )
+  }
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
