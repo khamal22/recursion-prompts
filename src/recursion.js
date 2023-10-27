@@ -381,9 +381,24 @@ var fibonacci = function (n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function (n) {
+var nthFibo = function (n, hold = 0, sum = 1) {
+  // Base Case
+  // add hold[0] and hold[1]
+  // replace hold[0] with [1] push sum to hold[1]
+  // Sub 1 from n each time
+  if (n < 0){
+    return null
+  }
+  if (n === 0){
+    return 0
+  }
+  if (n === 1){
+    return sum
+  }
+  if (n > 1){
+    return nthFibo(n-1, sum, sum += hold )
+  }
 };
-
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
@@ -400,11 +415,11 @@ var capitalizeWords = function (input) {
   // Return the modified 'list' array with the first word capitalized and the rest of the words capitalized
   return list;
 };
-
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 var capitalizeFirst = function (array) {
   //base case 
+  // if the input array is empty 
   // check if the input array is empty 
   if(array.length === 0){
     //if the array is empty return a empty array
@@ -431,72 +446,27 @@ return list;
 // nestedEvenSum(obj1); // 10
 var nestedEvenSum = function (obj) {
 };
-
 // 29. Flatten an array containing nested arrays.
 // Example: flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
 var flatten = function (arrays) {
 };
-
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function (str, obj = {}) {
-  if (str.length === 0) return obj;
-  letterTally(str.substring(1), obj);
-  if (obj[str[0]] === undefined) {
-    obj[str[0]] = 1;
-  } else {
-    obj[str[0]] += 1;
-  }
-  return obj;
+var letterTally = function (str, obj) {
 };
-
-// 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
-// elements they should be replaced with a single copy of the element. The order of the
-// elements should not be changed.
-// Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
-// Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
-var compress = function (list) {
-  if (list.length === 0) return [];
-  var res = compress(list.slice(1));
-  if (list[0] !== res[0]) {
-    res.unshift(list[0]);
-  }
-  return res;
-
-};
-
-// 32. Augment every element in a list with a new value where each element is an array
-// itself.
-// Example: augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
-var augmentElements = function (array, aug) {
-};
-
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
+
 var minimizeZeroes = function (array, resultList = []) {
   //base case
   if(array.length === 0){
 return resultList
   }
 //check if first item in array is a zero 
-if(array[0] === 0){
-
-}
-
-if(array[0] !== 0){
-
-}
-
 //if the first element in the array is zero check if the next element is zero 
 //if the next element is zero get rid of it
 //if the first value is not a zero push into the resultList array
-  if(array[0] === 0 && array[1] === 0){
-    return minimizeZeroes(array.slice(1), resultList)
-  } else {
-    resultList.push(array[0])
-    return minimizeZeroes(array.slice(1), resultList)
-  }
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -504,20 +474,6 @@ if(array[0] !== 0){
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function (array) {
-  if (array.length === 0) return [];
-  var list = alternateSign(array.slice(0, array.length-1));
-  var lng = array.length;
-  if (lng%2 === 0) {
-    if (array[lng-1] > 0) {
-      array[lng-1] = -array[lng-1];
-    }
-  } else {
-    if (array[lng-1] < 0) {
-      array[lng-1] = -array[lng-1];
-    }
-  }
-  list.push(array[lng-1]);
-  return list;
 
 
 };
@@ -527,27 +483,6 @@ var alternateSign = function (array) {
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function (str) {
 };
-
-// *** EXTRA CREDIT ***
-
-// 36. Return the number of times a tag occurs in the DOM.
-var tagCount = function (tag, node) {
-};
-
-// 37. Write a function for binary search.
-// Sample array:  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
-// console.log(binarySearch(5)) will return '5'
-
-var binarySearch = function (array, target, min, max) {
-};
-
-// 38. Write a merge sort function.
-// Sample array:  [34,7,23,32,5,62]
-// Sample output: [5,7,23,32,34,62]
-var mergeSort = function (array) {
-};
-
-
 
 //-----------------------------------
 // DON'T REMOVE THIS CODE -----------
@@ -675,5 +610,5 @@ if ((typeof process !== 'undefined') &&
     mergeSort,
   };
 }
-
+}
 //-----------------------------------
