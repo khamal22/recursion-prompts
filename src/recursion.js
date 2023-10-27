@@ -184,6 +184,7 @@ var reverse = function (string, resultStr = '') {
   }
   // access the first index of resultStr and assign to the last character in string
   resultStr += string[string.length - 1];
+  console.log(resultStr)
   // take last character off string
   string = string.slice(0, -1);
   // call reverse with param as arguments
@@ -224,31 +225,21 @@ var modulo = function (x, y) {
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
-
 // Base case
-  // for how long y is, add x to its self that many times
-  // Use store to store x and the following x changes     
+// for how long y is, add x to its self that many times
+// Use store to store x and the following x changes
 // Recursive Case
-  // if y is above 1 then add x by the first interger and sub y by 1 
-  // if y is under 1 then add x by the first interger and sub y by 1
-var multiply = function (x, y, store = []) { 
-  store.push(x) 
-  if (y > 1) {
-    return multiply(x + store[0], y - 1, store)
-  }
-  else if (y < -1) {
-    return multiply((x) + (store[0]), y + 1, store)
-  }
-  if (y === 1) {
-    return x
-  }
-  if (y === -1){
-    return -x
-  }
-  if (y === 0) {
-    return 0
-  }
+// if y is above 1 then add x by the first interger and sub y by 1
+// if y is under 1 then add x by the first interger and sub y by 1
+var multiply = function (x, y, store = []) {
+  store.push(x)
+  if (y > 1) { return multiply(x + store[0], y - 1, store) }
+  else if (y < -1) { return multiply((x) + (store[0]), y + 1, store) }
+  if (y === 1) { return x }
+  if (y === -1) { return -x } if (y === 0) { return 0 }
 };
+
+;
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
@@ -323,6 +314,7 @@ var buildList = function (value, length) {
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function (array, value) {
+var countOccurrence = function (array, value) {
   //base case 
   // if array is empty they are no occurences 
   if (array.length === 0){
@@ -389,23 +381,7 @@ var fibonacci = function (n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
-var nthFibo = function (n, hold = 0, sum = 1) {
-  // Base Case
-  // add hold[0] and hold[1]
-  // replace hold[0] with [1] push sum to hold[1]
-  // Sub 1 from n each time
-  if (n < 0){
-    return null
-  }
-  if (n === 0){
-    return 0
-  }
-  if (n === 1){
-    return sum
-  }
-  if (n > 1){
-    return nthFibo(n-1, sum, sum += hold )
-  }
+var nthFibo = function (n) {
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
@@ -464,13 +440,7 @@ var flatten = function (arrays) {
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
 var letterTally = function (str, obj = {}) {
-  //base
-  // change all to lower case
-  // if no string return obj 
-  str.toLowerCase()
-  if (str.length === 0) {
-  return obj;
-  }
+  if (str.length === 0) return obj;
   letterTally(str.substring(1), obj);
   if (obj[str[0]] === undefined) {
     obj[str[0]] = 1;
@@ -478,11 +448,6 @@ var letterTally = function (str, obj = {}) {
     obj[str[0]] += 1;
   }
   return obj;
-/*
-var letterTally = function(str, obj = {}) {
-  
-};
-*/
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -491,16 +456,13 @@ var letterTally = function(str, obj = {}) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function (list) {
-  // if list length is 0 then return list
-  if (list.length === 0){
-    return list
+  if (list.length === 0) return [];
+  var res = compress(list.slice(1));
+  if (list[0] !== res[0]) {
+    res.unshift(list[0]);
   }
+  return res;
 
-  if (list[0] === list[1]){
-    return 1 + countOccurrence(list.slice(1,list.length))
-  }
-  return countOccurrence(list.slice(1,list.length))
-  
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -518,6 +480,14 @@ var minimizeZeroes = function (array, resultList = []) {
 return resultList
   }
 //check if first item in array is a zero 
+if(array[0] === 0){
+
+}
+
+if(array[0] !== 0){
+
+}
+
 //if the first element in the array is zero check if the next element is zero 
 //if the next element is zero get rid of it
 //if the first value is not a zero push into the resultList array
@@ -534,6 +504,20 @@ return resultList
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function (array) {
+  if (array.length === 0) return [];
+  var list = alternateSign(array.slice(0, array.length-1));
+  var lng = array.length;
+  if (lng%2 === 0) {
+    if (array[lng-1] > 0) {
+      array[lng-1] = -array[lng-1];
+    }
+  } else {
+    if (array[lng-1] < 0) {
+      array[lng-1] = -array[lng-1];
+    }
+  }
+  list.push(array[lng-1]);
+  return list;
 
 
 };
