@@ -314,20 +314,17 @@ var buildList = function (value, length) {
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 var countOccurrence = function (array, value) {
-var countOccurrence = function (array, value) {
   //base case 
   // if array is empty they are no occurences 
-  if (array.length === 0){
-    return 0
+  if (array.length === 0) {
+    return 0;
   }
   //the recursive case checks if the first element of the array is equal to the target value
   //if it is, add 1 and call the function on the rest of the array
   //if it is not call the function on the rest of the array
-  
-  if (array[0] === value){
-    return 1 + countOccurrence(array.slice(1,array.length), value)
+  if (array[0] === value) {
+
   }
-  return countOccurrence(array.slice(1,array.length), value)
 };
 
 // 20. Write a recursive version of map.
@@ -491,12 +488,6 @@ if(array[0] !== 0){
 //if the first element in the array is zero check if the next element is zero 
 //if the next element is zero get rid of it
 //if the first value is not a zero push into the resultList array
-  if(array[0] === 0 && array[1] === 0){
-    return minimizeZeroes(array.slice(1), resultList)
-  } else {
-    resultList.push(array[0])
-    return minimizeZeroes(array.slice(1), resultList)
-  }
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -504,20 +495,7 @@ if(array[0] !== 0){
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function (array) {
-  if (array.length === 0) return [];
-  var list = alternateSign(array.slice(0, array.length-1));
-  var lng = array.length;
-  if (lng%2 === 0) {
-    if (array[lng-1] > 0) {
-      array[lng-1] = -array[lng-1];
-    }
-  } else {
-    if (array[lng-1] < 0) {
-      array[lng-1] = -array[lng-1];
-    }
-  }
-  list.push(array[lng-1]);
-  return list;
+  
 
 
 };
