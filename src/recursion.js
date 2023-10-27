@@ -322,24 +322,20 @@ var buildList = function (value, length) {
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
-var countOccurrence = function (array, value, store = []) {
+var countOccurrence = function (array, value) {
   //base case 
   // if array is empty they are no occurences 
-  
+  if (array.length === 0){
+    return 0
+  }
   //the recursive case checks if the first element of the array is equal to the target value
   //if it is, add 1 and call the function on the rest of the array
   //if it is not call the function on the rest of the array
-  let i = 0
-
-  if (array.length > 1 && array[i] === value){
-    i += 1
-    store.push(array[i])
-    return countOccurrence(array, value, store)
+  
+  if (array[0] === value){
+    return 1 + countOccurrence(array.slice(1,array.length), value)
   }
-
-
-
-  return store.length
+  return countOccurrence(array.slice(1,array.length), value)
 };
 
 // 20. Write a recursive version of map.
@@ -467,7 +463,26 @@ var flatten = function (arrays) {
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
-var letterTally = function (str, obj) {
+var letterTally = function (str, obj = {}) {
+  //base
+  // change all to lower case
+  // if no string return obj 
+  str.toLowerCase()
+  if (str.length === 0) {
+  return obj;
+  }
+  letterTally(str.substring(1), obj);
+  if (obj[str[0]] === undefined) {
+    obj[str[0]] = 1;
+  } else {
+    obj[str[0]] += 1;
+  }
+  return obj;
+/*
+var letterTally = function(str, obj = {}) {
+  
+};
+*/
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -476,7 +491,16 @@ var letterTally = function (str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 var compress = function (list) {
+  // if list length is 0 then return list
+  if (list.length === 0){
+    return list
+  }
 
+  if (list[0] === list[1]){
+    return 1 + countOccurrence(list.slice(1,list.length))
+  }
+  return countOccurrence(list.slice(1,list.length))
+  
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -497,6 +521,12 @@ return resultList
 //if the first element in the array is zero check if the next element is zero 
 //if the next element is zero get rid of it
 //if the first value is not a zero push into the resultList array
+  if(array[0] === 0 && array[1] === 0){
+    return minimizeZeroes(array.slice(1), resultList)
+  } else {
+    resultList.push(array[0])
+    return minimizeZeroes(array.slice(1), resultList)
+  }
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
