@@ -401,7 +401,7 @@ var nthFibo = function (n, hold = 0, sum = 1) {
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 var capitalizeWords = function (input) {
-  //base case 
+  //base case
   //if the array is empty return an empty array
   if (input.length === 0) {
     return []
